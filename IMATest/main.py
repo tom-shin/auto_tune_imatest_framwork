@@ -71,7 +71,9 @@ class IMATestControl(FileManager, QtWidgets.QMainWindow):
 
 
     def closeEvent(self, event):
-        self.stop_event.set()
+        if self.stop_event is not None:
+            self.stop_event.set()
+
         if self.producer_proc and self.producer_proc.is_alive():
             self.producer_proc.terminate()
         event.accept()
